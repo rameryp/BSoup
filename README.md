@@ -1,1 +1,2 @@
-# gitLEARN Sample Git PROJECT
+# gitLEARN 
+## Sample Git PROJECT
