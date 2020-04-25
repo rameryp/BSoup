@@ -1,3 +1,6 @@
+#####################
+## ROTATING PROXIES
+#####################
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
