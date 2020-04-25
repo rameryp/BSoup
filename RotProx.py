@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import random
 
-def clear():
+def clearScreen():
   print(chr(27)+'[2j')
   print('\033c')
   print('\x1bc')
@@ -22,9 +22,8 @@ proxies_doc = urlopen(proxies_req).read().decode('utf8')
 soup = BeautifulSoup(proxies_doc, 'html.parser')
 proxies_table = soup.find(id='proxylisttable')
 
-
 # Retrieve a random index proxy (we need the index to delete it if not working)
-def random_proxyIndex():
+def getRandomProxyIndex():
   return random.randint(0, len(proxies) - 1)
 
 # Save proxies in the array
@@ -41,11 +40,15 @@ def readInProxies():
 ####################################################################
 
 def main():  
+  clearScreen()
+  print ('Dumping proxy list')
+  print ('####################################'+'\n')
+
   readInProxies()
   #print(len(proxies))
-  proxy_index = random_proxyIndex()
+  randomIndex = getRandomProxyIndex()
   #print (proxy_index)
-  print (proxies[proxy_index])
+  print (proxies[randomIndex])
 
 if __name__ == "__main__":
       main()
