@@ -28,14 +28,16 @@ def getRandomProxyIndex():
 
 # Save proxies in the array
 def readInProxies():
+  index = 0
   for row in proxies_table.tbody.find_all('tr'):
     proxies.append({
       'ip':   row.find_all('td')[0].string,
       'port': row.find_all('td')[1].string,
       'country': row.find_all('td')[3].string
     })
+    
     a= row.find_all('td')[0].string
-    print (a)
+    print (str(index)+' '+ a)
 
 ####################################################################
 
