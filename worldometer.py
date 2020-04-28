@@ -20,7 +20,9 @@ myRequest.add_header('User-Agent', ua.random)
 myRequest_doc = urlopen(myRequest).read().decode('utf8')
 
 soup = BeautifulSoup(myRequest_doc, 'html.parser')
-content_table = soup.find(id='main_table_countries_today')
+full_content = soup.find(id='main_table_countries_today')
+table_rows = full_content.find_all('tr')
+
 
 ####################################################################
 
@@ -29,7 +31,7 @@ def main():
   print ('COVID Dump')
   print ('####################################'+'\n')
 
-  print (content_table)
+  print (table_rows)
 
 if __name__ == "__main__":
       main()
