@@ -39,7 +39,10 @@ def main():
   print ('COVID Dump')
   print ('####################################'+'\n')
 
-  print (table_rows)
+  #print (country_data)
+  for row in country_data[9:-8]:
+    if row: #not empty
+      print (row[0]+' Total Cases '+row[1])
 
 if __name__ == "__main__":
       main()
