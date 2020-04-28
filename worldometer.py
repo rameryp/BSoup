@@ -25,9 +25,23 @@ table_rows = full_content.find_all('tr')
 
 country_data =[]
 
-for tr in table_rows:
+def myInt(a):
+    if a:
+          return a
+    else:
+          return 0
+
+for tr in table_rows[9:-8]:  #skip regions row at the beginning and total rows at the end
+  # get all rows
   td = tr.find_all('td')
+  # remove trailing spaces
   row = [i.text.strip() for i in td]
+  #clean up rows
+  row[1:11] = [x.replace(',', '') for x in row[1:11]]
+  row[1:11] = [x.replace('+', '') for x in row[1:11]]
+  # convert string to int while managing empty value 
+  row[1:11] = map(myInt,row[1:11])
+  # add cleaned row
   country_data.append(row)
   
 
@@ -36,13 +50,15 @@ for tr in table_rows:
 
 def main():  
   clearScreen()
-  print ('COVID Dump')
+  print ('Data Dump')
+  
+
   print ('####################################'+'\n')
 
-  #print (country_data)
-  for row in country_data[9:-8]:
+  for row in country_data:
     if row: #not empty
-      print (row[0]+' Total Cases '+row[1])
+      print (row[0]+' - '+str(row[1])+' - '+str(row[2])+' - '+str(row[3])+' - ')
+      
 
 if __name__ == "__main__":
       main()
