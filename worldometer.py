@@ -23,6 +23,14 @@ soup = BeautifulSoup(myRequest_doc, 'html.parser')
 full_content = soup.find(id='main_table_countries_today')
 table_rows = full_content.find_all('tr')
 
+country_data =[]
+
+for tr in table_rows:
+  td = tr.find_all('td')
+  row = [i.text.strip() for i in td]
+  country_data.append(row)
+  
+
 
 ####################################################################
 
