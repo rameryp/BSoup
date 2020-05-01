@@ -1,6 +1,6 @@
-###################################################################
+########################################################################
 ## Read COVID 19 Stats from https://www.worldometers.info/coronavirus/
-###################################################################
+#######################################################################
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
@@ -36,22 +36,19 @@ def cleanArray(dirtyArray):
       cleanedArray = [x.replace('+', '') for x in cleanedArray]
       return cleanedArray
     
-    
-for tr in table_rows[9:-9]:  #skip regions row at the beginning and total rows at the end
-  # get all rows
-  td = tr.find_all('td')
-  # remove trailing spaces
-  row = [i.text.strip() for i in td]
-  row[1:11] = cleanArray(row[1:11])
-  row[1:11] = map(mk_int,row[1:11])
-  # add cleaned row
-  country_data.append(row)
+def main():      
+  #for tr in table_rows[9:-9]:  #skip regions row at the beginning and total rows at the end
+  for tr in table_rows[9:29]:  #skip regions row at the beginning and total rows at the end
+    # get all rows
+    td = tr.find_all('td')
+    # remove trailing spaces
+    row = [i.text.strip() for i in td]
+    row[1:11] = cleanArray(row[1:11])
+    row[1:11] = map(mk_int,row[1:11])
+    # add cleaned row
+    country_data.append(row)
 
 
-####################################################################
-
-def main():  
-  #clearScreen()
   Countries  = []
   TotalCases = []	
   NewCases	 = []	
@@ -59,7 +56,7 @@ def main():
   NewDeaths	 = []	
   TotalRecovered  = []	
   ActiveCases	 = []	
-  
+
   for row in country_data:
     Countries.append(row[0])
     TotalCases.append(row[1])
@@ -69,17 +66,21 @@ def main():
     TotalRecovered.append(row[5])
     ActiveCases.append(row[6])
 
-  df = pd.DataFrame({
-    'Countries':Countries,
-    'TotalCases':TotalCases,
-    'NewCases':NewCases,
+  data_dict = {
+    #'Countries':Countries,
+    #'TotalCases':TotalCases,
+    #'NewCases':NewCases,
     'TotalDeaths':TotalDeaths,
-    'NewDeaths':NewDeaths,
+    #'NewDeaths':NewDeaths,
     'TotalRecovered':TotalRecovered,
-    'ActiveCases':ActiveCases,
-    })
+    #'ActiveCases':ActiveCases 
+  }
 
-  
+  #columns = ['Countries','TotalCases','NewCases','TotalDeaths','NewDeaths','ActiveCases' ]
+  columns = ['TotalDeaths','TotalRecovered' ]
+  df = pd.DataFrame(data_dict, columns=columns,index=Countries)
+
+    
   print(df)
 
 if __name__ == "__main__":
