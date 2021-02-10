@@ -2,7 +2,7 @@
 name = "bsoup"
 version = "0.1.0"
 description = ""
-authors = ["rameryp <pierre.ramery@outlook.com>"]
+authors = ["rameryp"]
 
 [tool.poetry.dependencies]
 python = "^2.7"
