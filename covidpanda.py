@@ -1,7 +1,7 @@
 ########################################################################
 ## Read COVID 19 Stats from https://www.worldometers.info/coronavirus/
 #######################################################################
-from urllib.request import Request, urlopen
+from urllib.request import Request, urlopen  
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import pandas as pd
